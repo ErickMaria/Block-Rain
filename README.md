@@ -1,11 +1,11 @@
 # Block Rain
 
-## run desktop
+#### run desktop
 
 1. select the file index.html
 2. Open with Mozilla Firefox only
 
-## run Mobile
+#### run Mobile
 
 1. select the file index.html
 2. Open with Mozilla Firefox only
