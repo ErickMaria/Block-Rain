@@ -3,12 +3,11 @@ stageState = {
 	create: function (){
 		game.time.advancedTiming = true;
 
-		//game.stage.backgroundColor = '#44AACC';
 		game.stage.backgroundColor = '#95a5a6';
 		game.world.setBounds(0, 0, 8000, 800);
 		
-		//player = game.add.sprite(0, 250, 'player');
-		player = game.add.sprite(7950, 250, 'player');
+		player = game.add.sprite(0, 250, 'player');
+		//player = game.add.sprite(7950, 250, 'player');
 		player.height = 40;
 		player.width =  30;
 		game.physics.arcade.enable(player);
@@ -50,13 +49,7 @@ stageState = {
 		
 		this.blocks = game.add.group();
 		this.blocks.enableBody = true;
-		/*
-		if(game.device.desktop){
-			
-		} else {
 		
-		}
-		*/
 		for(var row in map){
 			for(var col in map[row]){
 				var tile = map[row][col];
@@ -75,19 +68,19 @@ stageState = {
 					map[row][col] = 2;
 
 				}if(tile === 1 && rndn > 5){
-					var block = this.blocks.create(x, y, 'block_bw');
-					block.body.immovable = true;
-					block.width = 40;
-					block.height = 40;
+					var block1 = this.blocks.create(x, y, 'block_bw');
+					block1.body.immovable = true;
+					block1.width = 40;
+					block1.height = 40;
 					
 					map[row][col] = 2;
 				}
 				
 				if(tile === 4){
-					var block = this.blocks.create(x, y, 'block_bw');
-					block.body.immovable = true;
-					block.width = 40;
-					block.height = 40;
+					var block2 = this.blocks.create(x, y, 'block_bw');
+					block2.body.immovable = true;
+					block2.width = 40;
+					block2.height = 40;
 						
 				}
 				
@@ -105,14 +98,7 @@ stageState = {
 				}
 			}
 		}
-			
-		// show virtual controllers
-		if(!game.device.desktop){
-			virtualController();
-		}
-		btnFullScreen();
-
-
+		
 		this.txtTiming = game.add.text(2, 5, 'time: 0', {font: '10px Emulogic', fill: '#ffffff'});
 		this.txtTiming.fixedToCamera = true;
 
@@ -133,6 +119,11 @@ stageState = {
 			this.txtTiming.text = 'time:' + timing++;
 		}, this);
 		
+		// set config for mobile divices
+		virtualController();
+		btnFullScreen();
+		btnFullScreenToggle();
+		
 	},
 	
 	update: function (){
@@ -146,14 +137,9 @@ stageState = {
 		game.physics.arcade.collide(player, this.blocks);
 		//game.physics.arcade.collide(player, this.flag);
 		game.physics.arcade.collide(this.flag, this.blocks);
-		//game.physics.arcade.collide(player, this.fallingblocks);
-		
-		
-		
+		game.physics.arcade.collide(player, this.fallingblocks);
 		
 		player.body.velocity.x = 0;
-		
-		btnFullScreenToggle()
 		
 		if(game.device.desktop){
 			moveDesktop();

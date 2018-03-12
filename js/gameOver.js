@@ -1,19 +1,19 @@
 var gameOver = {
 
 	create: function(){
-
+		
 		game.stage.backgroundColor = "#11111";
 
-		this.txtGameOver = game.add.text(500, game.world.centerY/1.5, 'GAME OVER :(', {font: '30px Emulogic', fill: '#ffffff'});
+		this.txtGameOver = game.add.text(game.world.centerX, game.world.centerY/1.5, 'GAME OVER :(', {font: '30px Emulogic', fill: '#ffffff'});
 		this.txtGameOver.anchor.setTo(0.5);
-
-		this.reset = game.add.text(397, game.world.centerY/0.6, 'press enter to reset', {font: '10px Emulogic', fill: '#ffffff'});
-		this.timing = game.add.text(445, game.world.centerY/0.54, ' time: '+VarGameSet.timing+'s', {font: '10px Emulogic', fill: '#ffffff'});
-		if(game.device.desktop){		
-			this.redifineDificulty = game.add.text(397, game.world.centerY/1.2, 'redifine difficulty', {font: '10px Emulogic', fill: '#ffffff'});
-			this.txtDificultyArrowLeft = game.add.text(440, game.world.centerY/1.1, '<', {font: '10px Emulogic', fill: '#f39c12'});
-			this.txtDificulty = game.add.text(460, game.world.centerY/1.1, difficulty[countDificultyArray], {font: '10px Emulogic', fill: '#bdc3c7'});
-			this.txtDificultyArrowRight = game.add.text(530, game.world.centerY/1.1, '>', {font: '10px Emulogic', fill: '#f39c12'});
+		this.reset = game.add.text(game.world.centerX/1.45, game.world.centerY/0.6, 'press enter to reset', {font: '10px Emulogic', fill: '#ffffff'});
+		this.timing = game.add.text(game.world.centerX/1.2, game.world.centerY/0.54, ' time: '+VarGameSet.timing+'s', {font: '10px Emulogic', fill: '#ffffff'});
+		
+		if(game.device.desktop){
+			this.redifineDificulty = game.add.text(game.world.centerX/1.40, game.world.centerY/1.05, 'redifine difficulty', {font: '10px Emulogic', fill: '#ffffff'});
+			this.txtDificultyArrowLeft = game.add.text(game.world.centerX/1.2, game.world.centerY/0.8, '<', {font: '10px Emulogic', fill: '#f39c12'});
+			this.txtDificulty = game.add.text(game.world.centerX/1.1, game.world.centerY/0.8, difficulty[countDificultyArray], {font: '10px Emulogic', fill: '#bdc3c7'});
+			this.txtDificultyArrowRight = game.add.text(game.world.centerX/0.9+(10), game.world.centerY/0.8, '>', {font: '10px Emulogic', fill: '#f39c12'});
 			
 			if(countDificultyArray === 2){
 				this.txtDificultyArrowRight.visible = false;
@@ -21,6 +21,7 @@ var gameOver = {
 				this.txtDificultyArrowLeft.visible = false;
 			}
 		}
+		
 		var Resetfade = 0;
 		game.time.events.repeat(Phaser.Timer.SECOND * 0.5, 1000, function(){
 			if(Resetfade % 2 === 0 ) {
@@ -31,8 +32,9 @@ var gameOver = {
 			Resetfade++;
 		}, this);
 
-
-		btnFullScreen();
+		
+	btnFullScreen();
+	btnReset();
 
 	},
 

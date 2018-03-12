@@ -32,22 +32,20 @@ var menuState = {
 		this.txtVersion = game.add.text(game.world.centerX-(game.world.centerX/-1.2), game.world.centerY/0.51, 'version: '+ version,{font: '8px Emulogic', fill: '#ffffff'});
 		this.txtVersion.anchor.set(0.5);	
 
-		this.txtState = game.add.text(game.world.centerX/2, game.world.centerY/1.3, 'STAGE 1', {font: '30px Emulogic', fill: '#ffffff'});
+		this.txtState = game.add.text(game.world.centerX/4, game.world.centerY/1.3, 'STAGE 1', {font: '30px Emulogic', fill: '#ffffff'});
 		this.txtState.visible = false;
-		this.txtStateGoal = game.add.text(game.world.centerX/2, game.world.centerY/0.88, 'arrive at the end stage before the blocks knock him', {font: '10px Emulogic', fill: '#ffffff'});
+		this.txtStateGoal = game.add.text(game.world.centerX/4, game.world.centerY/0.88, 'arrive at the end stage before the blocks knock him', {font: '10px Emulogic', fill: '#ffffff'});
 		this.txtStateGoal.visible = false;
-		this.txtStateGO = game.add.text(game.world.centerX/2, game.world.centerY/1.3, 'GO!', {font: '30px Emulogic', fill: '#ffffff'});
+		this.txtStateGO = game.add.text(game.world.centerX-25, game.world.centerY/1.1, 'GO!', {font: '30px Emulogic', fill: '#ffffff'});
 		this.txtStateGO.visible = false;
 
-		//go fullscreen in device mobile
+		// set config for mobile divices
 		btnFullScreen();
-		//game.input.onDown.add(goFull, game);
+		btnFullScreenToggle();
 		
 	},
 	
 	update: function (){
-
-		btnFullScreenToggle()
 		
 		if(game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).isDown && game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).downDuration(1)){
 			countDificultyArray++;
@@ -82,35 +80,40 @@ var menuState = {
 				this.displayStateGoal();
 			}, this);
 		}
-
+		
 		//desktop
-		if(game.input.keyboard.addKey(Phaser.Keyboard.ENTER).isDown){
+		if(game.device.desktop && game.input.keyboard.addKey(Phaser.Keyboard.ENTER).isDown){
 			this.txtStartGame.visible = false;
+			this.txtDificultyArrowLeft.visible = false;
+			this.txtDificultyArrowRight.visible = false;
+			this.txtDificulty.visible = false;
 			this.displayStateGoal();
 		}
 	},
-
+	
 	displayStateGoal: function(){
-		this.txtStartGame.visible = false;
-
+		
 		this.txtTitle.visible =false;
 		this.txtVersion.visible = false;
-		this.txtDificultyArrowLeft.visible = false;
-		this.txtDificultyArrowRight.visible = false;
-		this.txtDificulty.visible = false;
 		this.txtState.visible = true;
 		this.txtStateGoal.visible = true;
+		
 		game.time.events.add(Phaser.Timer.SECOND * 2.1, function(){
 			this.txtState.visible = false;
 			this.txtStateGoal.visible = false;
 			this.txtStateGO.visible = true;
 			
 			VarGameSet.difficultySelected = countDificultyArray + 1;
-
+			
+			if(!game.device.desktop){
+				 VarGameSet.difficultySelected  = 3;
+			}
+			
 			game.time.events.add(Phaser.Timer.SECOND * 0.3, function(){
 				game.state.start('stage1');
 			}, this);
 		}, this);
+		
 		
 	}
 	

@@ -1,17 +1,41 @@
 *{
-  margin: 0;
+	margin: 0;
 	padding: 0;
 }
 
-body{
-    margin-top: 0;
-    margin-left: 0;
+p{
+	visibility:hidden;
+	position:absolute;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
 } 
 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	#game{
+		margin: 16% auto auto auto;
+	}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  /* For desktop: */
-  body{
-    margin-top: 5%;
-    margin-left: 8%;
-  }
+	#game{
+		margin: 16% auto auto auto;
+	}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	#game{
+		margin: 16% auto auto auto;
+	}
+
 }
